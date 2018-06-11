@@ -1,14 +1,19 @@
 //Requires
-const app = require('express')();
-const express = require('express');
-const http = require('http').Server(app);
-const mongoose = require('mongoose');
-const config = require('./config/db');
-const path = require('path');
+const app = require('express')(); //express app
+const express = require('express'); //express.js
+const http = require('http').Server(app); //http server
+const mongoose = require('mongoose'); //mongoDB handling library
+const config = require('./config/db'); //database configuration
+const path = require('path'); //node.js path handler
+const router = express.Router(); //express router handler
+const authentication = require('./routes/authentication')(router); //authentication routes
+const bodyParser = require('body-parser');
 
 //Middleware
+app.use(bodyParser.urlencoded({extended: false}));
+app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, 'client/dist/client')));
-
+app.use('/authentication', authentication);
 
 //Routes
 app.get('*', function(req, res){
