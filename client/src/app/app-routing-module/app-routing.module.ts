@@ -5,22 +5,39 @@ import { HomeComponent } from '../components/home/home.component';
 import { DashboardComponent } from '../components/dashboard/dashboard.component';
 import { RegisterComponent } from '../components/register/register.component';
 import { LoginComponent } from '../components/login/login.component';
+import { ProfileComponent } from '../components/profile/profile.component';
+import { AuthGuard } from '../guards/auth.guard';
+import { NoAuthGuard } from '../guards/no-auth.guard';
 
 // Application Routes
 const routes: Routes = [
   {path: '',
-   component: HomeComponent
+   component: HomeComponent,
+   canActivate: [NoAuthGuard]
+  },
+  {
+  path: 'home',
+  component: HomeComponent,
+  canActivate: [NoAuthGuard]
   },
   { path: 'dashboard',
-    component: DashboardComponent
+    component: DashboardComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'register',
-    component: RegisterComponent
+    component: RegisterComponent,
+    canActivate: [NoAuthGuard]
   },
   {
     path: 'login',
-    component: LoginComponent
+    component: LoginComponent,
+    canActivate: [NoAuthGuard]
+  },
+  {
+    path: 'profile',
+    component: ProfileComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: '**',

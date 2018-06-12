@@ -11,6 +11,8 @@ import { HttpModule } from '@angular/http';
 import { AuthService } from './services/auth.service';
 import { LoginComponent } from './components/login/login.component';
 import { ProfileComponent } from './components/profile/profile.component';
+import { AuthGuard } from './guards/auth.guard';
+import { NoAuthGuard } from './guards/no-auth.guard';
 
 @NgModule({
   declarations: [
@@ -28,7 +30,7 @@ import { ProfileComponent } from './components/profile/profile.component';
     ReactiveFormsModule,
     HttpModule
   ],
-  providers: [AuthService],
+  providers: [AuthService, AuthGuard, NoAuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

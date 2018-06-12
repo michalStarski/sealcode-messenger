@@ -1,12 +1,16 @@
 import { Injectable } from '@angular/core';
 import { map } from 'rxjs/operators';
 import { Http, Headers, RequestOptions} from '@angular/http';
+import { JwtHelperService } from '@auth0/angular-jwt';
+
+const jwtHelper = new JwtHelperService();
 
 interface User {
   email: string;
   username: string;
   password: string;
 }
+
 
 @Injectable({
   providedIn: 'root'
@@ -15,10 +19,11 @@ export class AuthService {
 
   domain = 'http://localhost:8080';
   private user: String;
-  private authToken: String;
+  private authToken: string;
+  private options: RequestOptions;
 
   constructor(
-    private http: Http
+    private http: Http,
   ) { }
 
   // Register a user
@@ -36,7 +41,7 @@ export class AuthService {
         map(res => res.json())
       );
   }
-  // Live check if current typed username is valid 
+  // Live check if current typed username is valid
   checkUsername(username) {
     return this.http.get(this.domain + '/authentication/checkUsername/' + username)
       .pipe(
@@ -58,5 +63,43 @@ export class AuthService {
     localStorage.setItem('user', JSON.stringify(user));
     this.authToken = token;
     this.user = user;
+  }
+
+  // Load token from localStorage
+  loadToken() {
+    const token = localStorage.getItem('token');
+    this.authToken = token;
+  }
+
+  // Create Authorization header
+  createAuthenticationHeader() {
+    this.loadToken();
+    this.options = new RequestOptions({
+      headers: new Headers({
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        'Authorization': this.authToken
+      })
+    });
+  }
+
+  // Get user profile
+  getProfile() {
+    this.createAuthenticationHeader();
+    return this.http.get(this.domain + '/authentication/profile', this.options)
+      .pipe(
+        map(res => res.json())
+      );
+  }
+
+  // Logout function
+  logout() {
+    this.user = null;
+    this.authToken = null;
+    localStorage.clear();
+  }
+
+  checkLogin() {
+    return !jwtHelper.isTokenExpired(localStorage.getItem('token')); // true or false
   }
 }

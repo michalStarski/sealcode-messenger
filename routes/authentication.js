@@ -187,5 +187,71 @@ module.exports = function(router){
         }
     })
 
+    //Any route that goes above does not require authorization
+
+    //Verify the token to check if the user is a legit one
+    router.use(function(req,res,next){
+        //Get token from Authorization header
+        const token = req.get('Authorization');
+        //If there is not token display relevant message
+        if(!token){
+            res.json(
+                {
+                    success: false,
+                    message: "No token provided"
+                }
+            )
+        }else{
+            //If there is one check if it did not expired
+            jwt.verify(token, config.secret, function(err, decoded) {
+                if(err){
+                    res.json(
+                        {
+                            success: false,
+                            message: "Token invalid " + err
+                        }
+                    )
+                //If everything is allright pass it via next()
+                }else {
+                    req.decoded = decoded;
+                    next();
+                }
+            })
+        }
+    })
+
+    //Any route that goes below requires authorization
+
+    //Get user profile
+    router.get('/profile', function(req, res){
+        User.findOne({_id: req.decoded.userId}).select('username email')
+            .exec(((err, user) => {
+                if(err){
+                    res.json(
+                        {
+                            success: false,
+                            message: err
+                        }
+                    )
+                }else {
+                    if(!user){
+                        res.json(
+                            {
+                                success: false,
+                                message: 'User not found'
+                            }
+                        )
+                    }else {
+                        res.json(
+                            {
+                                success: true,
+                                user: user
+                            }
+                        )
+                    }
+                }
+            }))
+    })
+
     return router;
 }
