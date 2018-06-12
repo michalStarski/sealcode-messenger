@@ -1,0 +1,46 @@
+<h1 class="display-4">Register</h1>
+<form [formGroup]="form" (ngSubmit)="onRegisterSubmit()">
+        <div class="form-group">
+          <label for="exampleInputEmail1">Email address</label>
+          <input type="email" name="email" formControlName="email" class="form-control" [ngClass]="{'danger':(form.controls.email.errors && form.controls.email.dirty), 'success':(!form.controls.email.errors && form.controls.email.dirty)}" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+        </div>
+        <ul *ngIf="form.controls.email.errors?.required && form.controls.email.dirty">
+            <li class="warning-text">This field is required</li>
+        </ul>
+        <ul *ngIf="form.controls.email.errors?.validateEmail && form.controls.email.dirty">
+                <li class="warning-text">Email is not valid</li>
+        </ul>
+        <div class="form-group">
+                <label for="exampleInputUsername">Username</label>
+                <input type="text" name="username" formControlName="username" class="form-control" [ngClass]="{'danger':(form.controls.username.errors && form.controls.username.dirty), 'success':(!form.controls.username.errors && form.controls.username.dirty)}" id="exampleInputUsername" placeholder="Username">
+        </div>
+        <ul *ngIf="form.controls.username.errors?.required && form.controls.username.dirty">
+                <li class="warning-text">This field is required</li>
+        </ul>
+        <ul *ngIf="form.controls.username.errors?.validateUsername && form.controls.username.dirty">
+                <li class="warning-text">Username must have at least 5 characters and must not contain special signs</li>
+        </ul>
+        <div class="form-group">
+          <label for="exampleInputPassword1">Password</label>
+          <input type="password" name="password" formControlName="password" class="form-control" [ngClass]="{'danger':((form.controls.password.errors || form.errors?.validatePasswords) && form.controls.password.dirty), 'success':(!form.controls.password.errors && form.controls.password.dirty)}" id="exampleInputPassword1" placeholder="Password">
+        </div>
+        <ul *ngIf="form.controls.password.errors && form.controls.password.dirty">
+                <li class="warning-text">This field is required</li>
+        </ul>
+        <div class="form-group">
+                <label for="exampleInputConfirmPassword1">Confirm Password</label>
+                <input type="password" name="confirmPassword" formControlName="confirmPassword" class="form-control" [ngClass]="{'danger':((form.controls.confirmPassword.errors || form.errors?.validatePasswords) && form.controls.confirmPassword.dirty), 'success':(!form.controls.confirmPassword.errors && form.controls.confirmPassword.dirty)}" id="exampleInputConfirmPassword1" placeholder="Confirm Password">
+        </div>
+        <ul *ngIf="form.controls.confirmPassword.errors && form.controls.confirmPassword.dirty">
+                <li class="warning-text">This field is required</li>
+        </ul>
+        <ul *ngIf="form.errors?.validatePasswords && (form.controls.confirmPassword.dirty || form.controls.password.dirty)">
+                <li class="warning-text">Passwords do not match</li>
+        </ul>
+        <button [disabled]="!form.valid" type="submit" class="btn btn-primary">Submit</button>
+      </form>
+
+      <!-- Two-way data binding test -->
+      <!-- <p>Username: {{form.controls.username.value}}</p>
+      <p>Email: {{form.controls.email.value}}</p>
+      <p>Password: {{form.controls.password.value}}</p> -->

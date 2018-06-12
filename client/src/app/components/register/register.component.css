@@ -1,0 +1,11 @@
+.success{
+    border: 3px solid green;
+}
+
+.danger{
+    border: 3px solid red;
+}
+
+.warning-text{
+    color:#E34234
+}

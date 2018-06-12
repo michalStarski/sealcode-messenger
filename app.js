@@ -7,7 +7,7 @@ const config = require('./config/db'); //database configuration
 const path = require('path'); //node.js path handler
 const router = express.Router(); //express router handler
 const authentication = require('./routes/authentication')(router); //authentication routes
-const bodyParser = require('body-parser');
+const bodyParser = require('body-parser'); //body parsing middleware
 
 //Middleware
 app.use(bodyParser.urlencoded({extended: false}));
