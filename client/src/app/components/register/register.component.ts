@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-register',
@@ -8,10 +9,18 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 })
 export class RegisterComponent implements OnInit {
 
-  form: FormGroup;
+  private form: FormGroup;
+  private message: String;
+  private messageClass: String;
+  private processing: Boolean = false;
+  private emailMessage: String;
+  private emailValid: Boolean;
+  private usernameValid: Boolean;
+  private usernameMessage: String;
 
   constructor(
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private authService: AuthService
   ) {
     // Create form invoked
     this.createForm();
@@ -66,7 +75,51 @@ export class RegisterComponent implements OnInit {
 
   // Submit the form
   onRegisterSubmit() {
-    console.log(this.form);
+    this.processing = true;
+    const user = {
+      email: this.form.get('email').value,
+      username: this.form.get('username').value,
+      password: this.form.get('password').value,
+    };
+    this.authService.registerUser(user).subscribe(data => {
+      if (!data.success) {
+        this.messageClass = 'alert alert-danger';
+        this.message = data.message;
+        this.processing = false;
+      } else {
+        this.messageClass = 'alert alert-success';
+        this.message = data.message;
+      }
+      console.log(data);
+    });
+  }
+
+  checkEmail() {
+    this.authService.checkEmail(this.form.get('email').value).subscribe(
+      data => {
+        if (!data.success) {
+          this.emailValid = false;
+          this.emailMessage = data.message;
+        } else {
+          this.emailMessage = data.message,
+          this.emailValid = true;
+        }
+      }
+    );
+  }
+
+  checkUsername() {
+    this.authService.checkUsername(this.form.get('username').value).subscribe(
+      data => {
+        if (!data.success) {
+          this.usernameValid = false;
+          this.usernameMessage = data.message;
+        } else {
+          this.usernameMessage = data.message,
+          this.usernameValid = true;
+        }
+      }
+    );
   }
 
   ngOnInit() {

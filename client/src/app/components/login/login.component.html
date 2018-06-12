@@ -1,0 +1,18 @@
+<h1 class="display-4">Login</h1>
+<form [formGroup]="form" (ngSubmit)="onLoginSubmit()">
+        <div class="form-group">
+                <label for="exampleInputUsername">Username</label>
+                <input type="text" name="username" formControlName="username" class="form-control" [ngClass]="{'danger':(form.controls.username.errors && form.controls.username.dirty), 'success':(!form.controls.username.errors && form.controls.username.dirty)}" id="exampleInputUsername" placeholder="Username">
+        </div>
+        <ul *ngIf="form.controls.username.errors?.required && form.controls.username.dirty">
+                <li class="warning-text">This field is required</li>
+        </ul>
+        <div class="form-group">
+          <label for="exampleInputPassword1">Password</label>
+          <input type="password" name="password" formControlName="password" class="form-control" [ngClass]="{'danger':((form.controls.password.errors || form.errors?.validatePasswords) && form.controls.password.dirty), 'success':(!form.controls.password.errors && form.controls.password.dirty)}" id="exampleInputPassword1" placeholder="Password">
+        </div>
+        <ul *ngIf="form.controls.password.errors && form.controls.password.dirty">
+                <li class="warning-text">This field is required</li>
+        </ul>
+        <button [disabled]="!form.valid && processing && usernameValid && emailValid" type="submit" class="btn btn-primary">Submit</button>
+</form>

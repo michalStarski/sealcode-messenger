@@ -68,9 +68,9 @@ userSchema.pre('save', function(next){
 })
 
 //Check password method
-userSchema.methods.checkPassword = password => {
+userSchema.methods.checkPassword = function(password){
     //Compare typed password with a correct one
-    reutrn (bcrypt.compareSync(password, this.password));
+    return (bcrypt.compareSync(password, this.password));
 }
 
 module.exports = mongoose.model('User', userSchema);

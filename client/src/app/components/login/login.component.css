@@ -1,0 +1,27 @@
+p{
+    margin:0;
+    padding:0;
+  }
+  
+  .container{
+    display:table;
+    margin:auto;
+    background-color:#ffffff;
+    border: 1px solid #eeeeee;
+    max-width:500px;
+    margin: auto;
+    border-radius: 10px;
+    padding:10px;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .logo{
+    text-align: center;
+    font-size: 50px;
+  }
+  
+  .btn{
+    width:100%;
+    margin:20px 0;
+  }

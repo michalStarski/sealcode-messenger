@@ -8,8 +8,12 @@ const path = require('path'); //node.js path handler
 const router = express.Router(); //express router handler
 const authentication = require('./routes/authentication')(router); //authentication routes
 const bodyParser = require('body-parser'); //body parsing middleware
+const cors = require('cors'); //handling cross-origin requests
 
 //Middleware
+app.use(cors({
+    origin: 'http://localhost:4200',
+}));
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, 'client/dist/client')));
