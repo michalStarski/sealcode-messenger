@@ -1,1 +1,8 @@
 <h1 class="display-4">Dashboard</h1>
+<form #form="ngForm" (ngSubmit)="send()">
+    <input [(ngModel)]="currentMessage" type="text" name="input" id="input" autocomplete="off">
+    <button type="submit">Send</button>
+    <ul>
+        <li *ngFor="let message of fetchedMessages">{{message.from}}: {{message.content}}</li>
+    </ul>
+</form>

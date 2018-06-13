@@ -1,3 +1,5 @@
+//Sealcode Messenger server-side javascript
+
 //Requires
 const app = require('express')(); //express app
 const express = require('express'); //express.js
@@ -9,6 +11,10 @@ const router = express.Router(); //express router handler
 const authentication = require('./routes/authentication')(router); //authentication routes
 const bodyParser = require('body-parser'); //body parsing middleware
 const cors = require('cors'); //handling cross-origin requests
+
+//socket-io
+const io = require('socket.io')(http);
+const io_config = require('./config/chat')(io);
 
 //Middleware
 app.use(cors({
@@ -31,6 +37,7 @@ mongoose.connect(config.uri, err => {
         console.log('Not connected to database ' + err);
     else{
         console.log('Connected to databse ' + config.db)
+        io_config;
     }
 });
 

@@ -13,6 +13,8 @@ import { LoginComponent } from './components/login/login.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { AuthGuard } from './guards/auth.guard';
 import { NoAuthGuard } from './guards/no-auth.guard';
+import { FormsModule } from '@angular/forms';
+import { ChatService } from './services/chat.service';
 
 @NgModule({
   declarations: [
@@ -28,9 +30,10 @@ import { NoAuthGuard } from './guards/no-auth.guard';
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
-    HttpModule
+    HttpModule,
+    FormsModule,
   ],
-  providers: [AuthService, AuthGuard, NoAuthGuard],
+  providers: [AuthService, AuthGuard, NoAuthGuard, ChatService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

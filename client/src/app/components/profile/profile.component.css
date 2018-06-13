@@ -1,0 +1,31 @@
+.avatar{
+    height: 200px;
+    width: 200px;
+    background-color: #1f1f1f;
+    border-radius: 200px;
+    margin:20px;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    color:#ffffff;
+}
+
+.avBtn{
+    height:50px;
+    align-self: center;
+    margin-right: 1rem;
+}
+
+.pwdBtn{
+    height:50px;
+    align-self: center;
+}
+
+.wrapper{
+    display:flex;
+}
+
+.userAv{
+    margin:auto;
+    font-size:100px;
+}
