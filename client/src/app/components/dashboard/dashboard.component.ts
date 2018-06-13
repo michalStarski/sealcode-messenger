@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ChatService } from '../../services/chat.service';
 import { AuthService } from '../../services/auth.service';
-import { Router } from '@angular/router';
+import { Router, NavigationEnd } from '@angular/router';
 
 @Component({
   selector: 'app-dashboard',
@@ -21,7 +21,6 @@ export class DashboardComponent implements OnInit {
   constructor(private chatService: ChatService, private authService: AuthService, private router: Router) { }
 
   ngOnInit() {
-
     this.authService.getProfile()
       .subscribe(
         data => {
@@ -39,13 +38,14 @@ export class DashboardComponent implements OnInit {
       );
 
     // Fetch messages and push them into local array
-    this.chatService.newMessage()
+      this.chatService.newMessage()
       .subscribe(
         data => {
           console.log(data);
           this.fetchedMessages.push(data);
         }
       );
+
     // On connection join room 'Global'
     this.chatService.joinRoom('Global')
       .subscribe(

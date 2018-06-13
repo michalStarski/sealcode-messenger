@@ -5,7 +5,7 @@
     <ul>
         <li *ngFor="let message of fetchedMessages" class="message bg-white">
             <div class="rounded-circle userAvatar {{ message.senderAvatarColor }}"><i class="{{ message.senderAvatar }}"></i></div>
-            <span>{{ message.from }}:</span>
+            <span class="text-muted">{{ message.from }}:</span> &nbsp;
             <span>{{ message.content }}</span>
         </li>
     </ul>
@@ -21,7 +21,6 @@
             </div>
             <div class="roomPreviewText">
                 <span class="roomPreviewName">{{ room }}</span>
-                <span class="text-muted"></span>
             </div>
         </li>
     </ul>

@@ -29,6 +29,7 @@ export class ChatService {
   sendMessage(msg: Message) {
     console.log(msg);
     this.socket.emit('message', msg);
+    this.messages.push(msg);
   }
 
   // Create an observable that will look for incoming messages
