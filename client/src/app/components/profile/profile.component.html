@@ -3,7 +3,7 @@
 <app-change-profile-image *ngIf="showBackdrop"></app-change-profile-image>
 <h1 class="display-4">Profile</h1>
 <div class="wrapper">
-<div class="avatar">
+<div class="avatar {{ avatarColor }}">
     <i class="{{ avatar }} userAv"></i>
 </div>
 <button (click)="changeProfileImage()" class="btn btn-primary avBtn">Change Profile Image</button>

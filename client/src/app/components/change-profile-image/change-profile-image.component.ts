@@ -20,7 +20,26 @@ export class ChangeProfileImageComponent implements OnInit {
   }
 
   setAvatar(avatar: string): void {
-    this.avatar = avatar;
+    switch (avatar) {
+      case 'suit':
+        this.avatar = 'fas fa-user-tie';
+        break;
+      case 'ninja':
+        this.avatar = 'fas fa-user-ninja';
+        break;
+      case 'agent':
+        this.avatar = 'fas fa-user-secret';
+        break;
+      case 'medic':
+        this.avatar = 'fas fa-user-md';
+        break;
+      case 'astronaut':
+        this.avatar = 'fas fa-user-astronaut';
+        break;
+      case 'headless':
+        this.avatar = 'fas fa-user-slash';
+        break;
+    }
   }
 
 }

@@ -224,7 +224,8 @@ module.exports = function(router){
 
     //Get user profile
     router.get('/profile', function(req, res){
-        User.findOne({_id: req.decoded.userId}).select('username email avatar')
+        console.log(req.decoded);
+        User.findOne({_id: req.decoded.userId}).select('username email avatar avatarColor')
             .exec(((err, user) => {
                 if(err){
                     res.json(
@@ -242,7 +243,6 @@ module.exports = function(router){
                             }
                         )
                     }else {
-                        console.log(user);
                         res.json(
                             {
                                 success: true,
@@ -252,7 +252,52 @@ module.exports = function(router){
                     }
                 }
             }))
-    })
+    });
+
+    //Update avatar route
+    router.put('/updateAvatar', function(req, res){
+        if(!req.body.avatar || !req.body.avatarColor) {
+            res.json(
+                {
+                    success: false,
+                    message: 'Wrong data!'
+                }
+            )
+        }else{
+            User.findById(req.decoded.userId, function(err, user){
+                if(err){
+                    res.json(
+                        {
+                            success: false,
+                            message: err
+                        }
+                    )
+                }else {
+                    
+                    user.avatar = 'fas fa-user-slash';
+                    user.avatarColor = 'bg-dark';
+                    user.save(function(err, updatedUser){
+                        if(err){
+                            res.json(
+                                {
+                                    success: false,
+                                    message: err
+                                }
+                            )
+                        }
+                        else{
+                            res.json(
+                                {
+                                    success: true,
+                                    message: 'Profile picture updated!'
+                                }
+                            )
+                        }
+                    })
+                }
+            })
+        }
+    });
 
     return router;
 }

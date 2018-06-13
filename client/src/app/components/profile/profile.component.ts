@@ -12,6 +12,7 @@ export class ProfileComponent implements OnInit {
   private username: String;
   private email: String;
   private avatar: String;
+  private avatarColor: String;
 
   @Input() private showBackdrop: Boolean = false;
 
@@ -23,6 +24,7 @@ export class ProfileComponent implements OnInit {
         this.username = profile.user.username;
         this.email = profile.user.email;
         this.avatar = profile.user.avatar;
+        this.avatarColor = profile.user.avatarColor;
       },
       err => { console.log(err); }
     );
