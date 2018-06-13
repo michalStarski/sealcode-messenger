@@ -12,12 +12,15 @@ module.exports = function(io){
         })
 
         socket.on('message', data => {
+            console.log(data);
             //If received a message, save it to the database and emit it back
             const m = new Message({
                 from: data.from,
                 to: data.to,
                 content: data.content,
-                date: Date.now()
+                date: Date.now(),
+                senderAvatar: data.senderAvatar,
+                senderAvatarColor: data.senderAvatarColor
             });
             m.save(err => {
                 if(err)

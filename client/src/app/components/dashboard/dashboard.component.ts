@@ -13,8 +13,9 @@ export class DashboardComponent implements OnInit {
   private currentMessage: string;
   private fetchedMessages: Array<Object> = [];
 
-  private username: String;
-  private userAvatar: String = 'default';
+  private username: string;
+  private userAvatar: string;
+  private userAvatarColor: string;
   private room: String = 'Global';
 
   constructor(private chatService: ChatService, private authService: AuthService, private router: Router) { }
@@ -24,6 +25,7 @@ export class DashboardComponent implements OnInit {
     this.authService.getProfile()
       .subscribe(
         data => {
+          console.log(data);
           // Add this condition when ready to production because of nodemon constant updates
           // if (!data.success) {
           //   alert(data.message);
@@ -31,9 +33,12 @@ export class DashboardComponent implements OnInit {
           //   this.router.navigate(['/home']);
           // }
             this.username = data.user.username;
+            this.userAvatar = data.user.avatar;
+            this.userAvatarColor = data.user.avatarColor;
         },
       );
 
+    // Fetch messages and push them into local array
     this.chatService.newMessage()
       .subscribe(
         data => {
@@ -41,6 +46,7 @@ export class DashboardComponent implements OnInit {
           this.fetchedMessages.push(data);
         }
       );
+    // On connection join room 'Global'
     this.chatService.joinRoom('Global')
       .subscribe(
         data => {
@@ -51,9 +57,11 @@ export class DashboardComponent implements OnInit {
 
   send() {
     this.chatService.sendMessage({
-      from: localStorage.getItem('user'),
+      from: this.username,
       to: 'global',
-      content: this.currentMessage
+      content: this.currentMessage,
+      senderAvatar: this.userAvatar,
+      senderAvatarColor: this.userAvatarColor
     });
     this.currentMessage = '';
   }

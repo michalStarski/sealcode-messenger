@@ -8,6 +8,8 @@ interface Message {
   from: string;
   to: string;
   content: string;
+  senderAvatar: string;
+  senderAvatarColor: string;
 }
 
 @Injectable({
@@ -25,6 +27,7 @@ export class ChatService {
 
   // Send Message
   sendMessage(msg: Message) {
+    console.log(msg);
     this.socket.emit('message', msg);
   }
 
