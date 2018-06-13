@@ -3,7 +3,7 @@
     <div class="roomName">Room: <span class="text-primary">{{ room }}</span></div>
     <div class="messages col-12 col-md-8 border-0 bg-light">
     <ul>
-        <li *ngFor="let message of fetchedMessages" class="message bg-white">
+        <li *ngFor="let message of fetchedMessages.reverse()" class="message bg-white">
             <div class="rounded-circle userAvatar {{ message.senderAvatarColor }}"><i class="{{ message.senderAvatar }}"></i></div>
             <span class="text-muted">{{ message.from }}:</span> &nbsp;
             <span>{{ message.content }}</span>
