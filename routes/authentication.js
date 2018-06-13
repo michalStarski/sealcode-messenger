@@ -224,7 +224,7 @@ module.exports = function(router){
 
     //Get user profile
     router.get('/profile', function(req, res){
-        User.findOne({_id: req.decoded.userId}).select('username email')
+        User.findOne({_id: req.decoded.userId}).select('username email avatar')
             .exec(((err, user) => {
                 if(err){
                     res.json(
@@ -242,6 +242,7 @@ module.exports = function(router){
                             }
                         )
                     }else {
+                        console.log(user);
                         res.json(
                             {
                                 success: true,

@@ -1,0 +1,20 @@
+<div class="container border bg-light">
+  <h2 style="text-align: center;">Change Profile Picture</h2>
+  <select (change)="setAvatar($event.target.value)" class="form-control" name="image" id="image">
+    <option value="ninja">Ninja</option>
+    <option value="agent">Agent</option>
+    <option value="suit">Suit</option>
+    <option value="medic">Medic</option>
+    <option value="astronaut">Astronaut</option>
+    <option value="headless">Headless</option>
+  </select>
+  <ul class="colors">
+    <li (click)="setColor('bg-primary')" class="bg-primary"></li>
+    <li (click)="setColor('bg-secondary')" class="bg-secondary"></li>
+    <li (click)="setColor('bg-success')"  class="bg-success"></li>
+    <li (click)="setColor('bg-danger')" class="bg-danger"></li>
+    <li (click)="setColor('bg-info')" class="bg-info"></li>
+  </ul>
+  <div style="margin: 10px;">Color: {{color}} <br> Avatar: {{avatar}}</div>
+  <button class="btn btn-success">Update</button>
+</div>

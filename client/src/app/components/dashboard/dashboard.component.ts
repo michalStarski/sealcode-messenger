@@ -24,13 +24,13 @@ export class DashboardComponent implements OnInit {
     this.authService.getProfile()
       .subscribe(
         data => {
-          if (!data.success) {
-            alert(data.message);
-            this.authService.logout();
-            this.router.navigate(['/home']);
-          } else {
-            this.username = localStorage.getItem('user').replace(/"/g, '');
-          }
+          // Add this condition when ready to production because of nodemon constant updates
+          // if (!data.success) {
+          //   alert(data.message);
+          //   this.authService.logout();
+          //   this.router.navigate(['/home']);
+          // }
+            this.username = data.user.username;
         },
       );
 

@@ -1,9 +1,12 @@
+<div>
+<app-backdrop (backdropEvent)="hideBackdrop()" [showBackdrop]="showBackdrop"></app-backdrop>
+<app-change-profile-image *ngIf="showBackdrop"></app-change-profile-image>
 <h1 class="display-4">Profile</h1>
 <div class="wrapper">
 <div class="avatar">
-    <i class="fas fa-user-ninja userAv"></i>
+    <i class="{{ avatar }} userAv"></i>
 </div>
-<button class="btn btn-primary avBtn">Change Profile Image</button>
+<button (click)="changeProfileImage()" class="btn btn-primary avBtn">Change Profile Image</button>
 <button class="btn btn-danger pwdBtn">Change Password</button>
 </div>
 <table class="table">
@@ -20,3 +23,4 @@
       </tr>
     </tbody>
   </table>
+</div>

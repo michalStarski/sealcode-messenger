@@ -15,6 +15,8 @@ import { AuthGuard } from './guards/auth.guard';
 import { NoAuthGuard } from './guards/no-auth.guard';
 import { FormsModule } from '@angular/forms';
 import { ChatService } from './services/chat.service';
+import { BackdropComponent } from './components/backdrop/backdrop.component';
+import { ChangeProfileImageComponent } from './components/change-profile-image/change-profile-image.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +26,9 @@ import { ChatService } from './services/chat.service';
     DashboardComponent,
     RegisterComponent,
     LoginComponent,
-    ProfileComponent
+    ProfileComponent,
+    BackdropComponent,
+    ChangeProfileImageComponent
   ],
   imports: [
     BrowserModule,
