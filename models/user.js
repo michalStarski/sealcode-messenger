@@ -1,6 +1,7 @@
 //User model
 const bcrypt = require('bcrypt-nodejs');
 
+//Mongoose config
 const mongoose = require('mongoose');
 mongoose.Promise = global.Promise;
 

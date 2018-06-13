@@ -1,0 +1,55 @@
+*{
+    margin:0;
+    padding:0;
+}
+.messages ul, .rooms{
+    list-style: none;
+}
+.messages{
+    padding:0;
+}
+.messages ul{
+    padding:0;
+    height: 65vh;
+    overflow: scroll;
+}
+
+.roomName{
+    width:100%;
+    text-align: center;
+}
+
+.rooms{
+    min-height:65vh;
+}
+
+.bar{
+    display:grid;
+    grid-template-columns: 8fr 2fr;
+}
+
+.roomPreview{
+    min-height:20%;
+    display:flex;
+    align-items: center;
+}
+
+.roomPreview:hover{
+    background-color:#428bca;
+}
+
+.roomPicture{
+    font-size:4rem;
+    margin:10px;
+}
+
+.roomPreviewName{
+    margin-right:1rem;
+}
+
+.roomPreviewText{
+    display:flex;
+    justify-content: space-between;
+    width:60%;
+    overflow: hidden;
+}

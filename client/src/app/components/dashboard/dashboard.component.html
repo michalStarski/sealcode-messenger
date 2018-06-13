@@ -1,8 +1,26 @@
-<h1 class="display-4">Dashboard</h1>
-<form #form="ngForm" (ngSubmit)="send()">
-    <input [(ngModel)]="currentMessage" type="text" name="input" id="input" autocomplete="off">
-    <button type="submit">Send</button>
+<h1 style="overflow: scroll;" class="display-4">{{ username }}'s Dashboard</h1>
+<div class="wrapper row">
+    <div class="roomName">Room: <span class="text-primary">{{ room }}</span></div>
+    <div class="messages col-12 col-md-8 border-0 bg-light">
     <ul>
-        <li *ngFor="let message of fetchedMessages">{{message.from}}: {{message.content}}</li>
+        <li *ngFor="let message of fetchedMessages">
+            {{message.from}}: {{message.content}}
+        </li>
     </ul>
-</form>
+    <form #form="ngForm" (ngSubmit)="send()" class="form-group bar">
+            <input class="form-control" [(ngModel)]="currentMessage" type="text" name="input" id="input" autocomplete="off">
+            <button class="btn btn-primary" type="submit">Send</button>
+    </form>
+    </div>
+    <ul class="rooms bg-dark text-white col-12 col-md-4">
+        <li class="roomPreview border">
+            <div class="roomPicture">
+                <i class="fas fa-globe"></i>
+            </div>
+            <div class="roomPreviewText">
+                <span class="roomPreviewName">{{ room }}</span>
+                <span class="text-muted"></span>
+            </div>
+        </li>
+    </ul>
+</div>

@@ -40,4 +40,15 @@ export class ChatService {
     return observable;
   }
 
+  joinRoom(name) {
+    const observable = new Observable<any>(obs => {
+      this.socket.on(`fetched${name}`, data => {
+        this.messages.push(data);
+        obs.next(data);
+      });
+      return () => this.socket.disconnect();
+    });
+    return observable;
+  }
+
 }
