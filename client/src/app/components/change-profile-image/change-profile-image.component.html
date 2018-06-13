@@ -16,5 +16,5 @@
     <li (click)="setColor('bg-info')" class="bg-info"></li>
   </ul>
   <div style="margin: 10px;">Color: {{color}} <br> Avatar: {{avatar}}</div>
-  <button class="btn btn-success">Update</button>
+  <button (click)="update()" class="btn btn-success">Update</button>
 </div>

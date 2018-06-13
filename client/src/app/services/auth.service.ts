@@ -99,7 +99,23 @@ export class AuthService {
     localStorage.clear();
   }
 
+  // Check whether token expired or not
   checkLogin() {
     return !jwtHelper.isTokenExpired(localStorage.getItem('token')); // true or false
+  }
+
+  // Update user profile picture
+  updateUserPicture(icon, color) {
+    const icons = ['fas fa-user-tie', 'fas fa-user-ninja', 'fas fa-user-secret', 'fas fa-user-md',
+    'fas fa-user-astronaut', 'fas fa-user-slash'];
+    const colors = ['bg-primary', 'bg-secondary', 'bg-success', 'bg-danger', 'bg-info'];
+
+    this.createAuthenticationHeader();
+    return this.http.put(this.domain + '/authentication/updateAvatar', {
+      avatar: icon,
+      avatarColor: color
+    }, this.options).pipe(
+      map(res => res.json())
+    );
   }
 }

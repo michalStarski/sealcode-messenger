@@ -274,8 +274,8 @@ module.exports = function(router){
                     )
                 }else {
                     
-                    user.avatar = 'fas fa-user-slash';
-                    user.avatarColor = 'bg-dark';
+                    user.avatar = req.body.avatar;
+                    user.avatarColor = req.body.avatarColor;
                     user.save(function(err, updatedUser){
                         if(err){
                             res.json(

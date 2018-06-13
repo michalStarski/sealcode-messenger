@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-change-profile-image',
@@ -7,7 +8,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ChangeProfileImageComponent implements OnInit {
 
-  constructor() { }
+  constructor(private authService: AuthService) { }
 
   private color: string;
   private avatar: string;
@@ -40,6 +41,20 @@ export class ChangeProfileImageComponent implements OnInit {
         this.avatar = 'fas fa-user-slash';
         break;
     }
+  }
+
+  // Update profile image and reload the site
+  update() {
+    this.authService.updateUserPicture(this.avatar, this.color)
+      .subscribe(
+        response => {
+          if (!response.success) {
+            alert(response.message);
+          } else {
+            location.reload();
+          }
+        }
+      );
   }
 
 }
