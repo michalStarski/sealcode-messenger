@@ -17,6 +17,7 @@ import { FormsModule } from '@angular/forms';
 import { ChatService } from './services/chat.service';
 import { BackdropComponent } from './components/backdrop/backdrop.component';
 import { ChangeProfileImageComponent } from './components/change-profile-image/change-profile-image.component';
+import { ChangePasswordComponent } from './components/change-password/change-password.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { ChangeProfileImageComponent } from './components/change-profile-image/c
     LoginComponent,
     ProfileComponent,
     BackdropComponent,
-    ChangeProfileImageComponent
+    ChangeProfileImageComponent,
+    ChangePasswordComponent
   ],
   imports: [
     BrowserModule,

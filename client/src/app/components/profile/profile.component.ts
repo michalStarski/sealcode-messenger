@@ -1,6 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
-import { BackdropComponent } from '../backdrop/backdrop.component';
 
 @Component({
   selector: 'app-profile',
@@ -13,6 +12,8 @@ export class ProfileComponent implements OnInit {
   private email: String;
   private avatar: String;
   private avatarColor: String;
+  private avatarChangeModal: Boolean = false;
+  private passwordModal: Boolean = false;
 
   @Input() private showBackdrop: Boolean = false;
 
@@ -32,9 +33,17 @@ export class ProfileComponent implements OnInit {
 
   changeProfileImage() {
     this.showBackdrop = true;
+    this.avatarChangeModal = true;
+  }
+
+  changePassword() {
+    this.showBackdrop = true;
+    this.passwordModal = true;
   }
 
   hideBackdrop() {
     this.showBackdrop = false;
+    this.avatarChangeModal = false;
+    this.passwordModal = false;
   }
 }

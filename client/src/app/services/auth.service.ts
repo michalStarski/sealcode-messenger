@@ -118,4 +118,21 @@ export class AuthService {
       map(res => res.json())
     );
   }
+
+  // Change user's password
+  changePassword(oldPassword, newPassword) {
+    if (oldPassword.length === 0 || newPassword.length === 0) {
+      alert('Please provide all the data!');
+      return;
+    }
+
+    this.createAuthenticationHeader();
+    return this.http.put(this.domain + '/authentication/changePassword', {
+      oldPassword: oldPassword,
+      newPassword: newPassword
+    }, this.options).pipe(
+      map(res => res.json())
+    );
+
+  }
 }

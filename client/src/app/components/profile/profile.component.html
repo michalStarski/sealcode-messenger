@@ -1,13 +1,14 @@
 <div>
 <app-backdrop (backdropEvent)="hideBackdrop()" [showBackdrop]="showBackdrop"></app-backdrop>
-<app-change-profile-image *ngIf="showBackdrop"></app-change-profile-image>
+<app-change-profile-image [show]="avatarChangeModal"></app-change-profile-image>
+<app-change-password [show]="passwordModal"></app-change-password>
 <h1 class="display-4">Profile</h1>
 <div class="wrapper">
 <div class="avatar {{ avatarColor }}">
     <i class="{{ avatar }} userAv"></i>
 </div>
 <button (click)="changeProfileImage()" class="btn btn-primary avBtn">Change Profile Image</button>
-<button class="btn btn-danger pwdBtn">Change Password</button>
+<button (click)="changePassword()" class="btn btn-danger pwdBtn">Change Password</button>
 </div>
 <table class="table">
     <thead class="thead-dark">

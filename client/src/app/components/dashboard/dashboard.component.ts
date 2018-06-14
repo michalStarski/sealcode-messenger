@@ -37,13 +37,14 @@ export class DashboardComponent implements OnInit {
         },
     );
 
+    // Fetch room messages from server
     this.chatService.fetchMessages('global').subscribe(
       data => {
         data.json().map(msg => this.fetchedMessages.push(msg));
       }
     );
 
-    // Fetch messages and push them into local array
+    // Subscribe to changes
       this.chatService.newMessage()
       .subscribe(
         data => {
@@ -53,7 +54,14 @@ export class DashboardComponent implements OnInit {
       );
   }
 
+  // Send a new message
   send() {
+
+    // Prevent from sending empty messages
+    if (this.currentMessage.length === 0) {
+      return;
+    }
+
     this.chatService.sendMessage({
       from: this.username,
       to: 'global',

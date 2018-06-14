@@ -1,4 +1,4 @@
-<div class="container border bg-light">
+<div *ngIf="show" class="container border bg-light">
   <h2 style="text-align: center;">Change Profile Picture</h2>
   <select (change)="setAvatar($event.target.value)" class="form-control" name="image" id="image">
     <option value="ninja">Ninja</option>

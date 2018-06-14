@@ -2,6 +2,7 @@ const User = require('../models/user');
 const jwt = require('jsonwebtoken');
 const config = require('../config/db');
 const Message = require('../models/message');
+const bcrypt = require('bcrypt-nodejs');
 
 module.exports = function(router){
     //Register route
@@ -308,6 +309,62 @@ module.exports = function(router){
         }
     });
 
+    //Change password route
+    router.put('/changePassword', function(req, res){
+        if(!req.body.oldPassword || !req.body.newPassword){
+            res.json(
+                {
+                    success: false,
+                    message: 'Wrong data!'
+                }
+            )
+        }
+        else{
+            User.findOne({ _id:req.decoded.userId }).select('password')
+                .exec(function(err, user){
+                    if(err){
+                        res.json(
+                            {
+                                success: false,
+                                message: err
+                            }
+                        )
+                    }else{
+                        const valid = user.checkPassword(req.body.oldPassword);
+                        if(!valid) {
+                            res.json(
+                                {
+                                    success: false,
+                                    message: 'Wrong password!'
+                                }
+                            )
+                        }else{
+                            user.password = req.body.newPassword;
+                            user.save(function(err, updatedUser){
+                                if(err){
+                                    res.json(
+                                        {
+                                            success: false,
+                                            message: err
+                                        }
+                                    )
+                                }
+                                else{
+                                    res.json(
+                                        {
+                                            success: true,
+                                            message: 'Password Updated!'
+                                        }
+                                    )
+                                }
+                            })
+                        }
+                    }
+                });
+        }
+    })
+
+    //Fetch messages from certain room rotue
     router.get('/messages/:room', function(req,res){
         Message.find({to: req.params.room}, function(err, msg){
             res.json(msg);

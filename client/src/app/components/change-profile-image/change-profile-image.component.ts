@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
 
 @Component({
@@ -12,8 +12,10 @@ export class ChangeProfileImageComponent implements OnInit {
 
   private color: string;
   private avatar: string;
+  @Input() private show: boolean;
 
   ngOnInit() {
+    console.log(this.show);
   }
 
   setColor(color: string): void {
