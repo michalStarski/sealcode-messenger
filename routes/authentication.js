@@ -234,7 +234,6 @@ module.exports = function(router){
 
     //Get user profile
     router.get('/profile', function(req, res){
-        console.log(req.decoded);
         User.findOne({_id: req.decoded.userId}).select('username email avatar avatarColor rooms')
             .exec(((err, user) => {
                 if(err){
@@ -362,7 +361,50 @@ module.exports = function(router){
                     }
                 });
         }
-    })
+    });
+
+    //Route for adding a room to save for the user
+    router.put('/addRoom', function(req, res){
+        if(!req.body.roomname){
+            res.json(
+                {
+                    success: false,
+                    message: 'Wrong data!'
+                }
+            )
+        }
+        else{
+            User.findOne({_id: req.decoded.userId}, function(err, user){
+                if(err){
+                    res.json(
+                        {
+                            success: false,
+                            message: err
+                        }
+                    )
+                }else{
+                    user.rooms = user.rooms.concat(req.body.roomname);
+                    user.save(function(err, updatedUser){
+                        if(err){
+                            res.json(
+                                {
+                                    success: false,
+                                    message: err
+                                }
+                            )
+                        } else{
+                            res.json(
+                                {
+                                    message: true,
+                                    message: 'room added'
+                                }
+                            )
+                        }
+                    })
+                }
+            })
+        }
+    });
 
     //Fetch messages from certain room rotue
     router.get('/messages/:room', function(req,res){

@@ -82,6 +82,10 @@ export class DashboardComponent implements OnInit {
       return;
     }
     this.rooms.push(this.newRoomName);
+    this.chatService.addRoom(this.newRoomName)
+      .subscribe(
+        data => alert(data.json().message)
+      );
     this.newRoomName = '';
   }
 

@@ -62,5 +62,18 @@ export class ChatService {
     });
     return this.http.get(this.domain + `/authentication/messages/${roomName}`, options);
   }
+
+  addRoom(roomName) {
+    const token = localStorage.getItem('token');
+    this.authToken = token;
+    const options = new RequestOptions({
+      headers: new Headers({
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        'Authorization': this.authToken
+      })
+    });
+    return this.http.put(this.domain + '/authentication/addRoom', {roomname: roomName}, options);
+  }
 }
 

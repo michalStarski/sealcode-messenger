@@ -15,19 +15,17 @@
     </form>
     </div>
     <ul class="rooms bg-dark text-white col-12 col-md-4">
+        <div class="room-bar">
+                    <label for="room">Create a new room</label>
+                    <input [(ngModel)]="newRoomName" type="text" name="room" class="form-control" id="room" autocomplete="off">
+                    <i (click)="addRoom()" class="fas fa-plus-square text-success"></i>
+        </div>
         <li (click)="changeRoom(room)" *ngFor="let room of rooms" class="roomPreview border">
             <div class="roomPicture">
                 <i [ngClass]="{'fa fa-globe': room === 'global', 'fas fa-at': room !== 'global'}" class="fas fa-globe"></i>
             </div>
             <div class="roomPreviewText">
                 <span class="roomPreviewName">{{ room }}</span>
-            </div>
-        </li>
-        <li>
-            <div class="room-bar">
-                <label for="room">Create a new room</label>
-                <input [(ngModel)]="newRoomName" type="text" name="room" class="form-control" id="room" autocomplete="off">
-                <i (click)="addRoom()" class="fas fa-plus-square text-success"></i>
             </div>
         </li>
     </ul>
