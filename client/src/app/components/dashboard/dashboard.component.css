@@ -31,7 +31,7 @@
 }
 
 .roomPreview{
-    min-height:20%;
+    min-height:10%;
     display:flex;
     align-items: center;
 }
@@ -76,12 +76,15 @@
     bottom: 0;
     right:0;
     margin-right:10px;
-    font-size:1.5rem;
+    font-size:1rem;
     cursor:pointer;
+    display:flex;
+    align-items: center;
+    justify-content: space-around;
+    width:100%;
+    padding:20px;
 }
 
-.room-bar i:hover::before {
-    content: 'Add a room';
-    font-size: 1rem;
-    color: yellowgreen;
+.room-bar i{
+    font-size:1.5rem;
 }

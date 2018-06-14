@@ -235,7 +235,7 @@ module.exports = function(router){
     //Get user profile
     router.get('/profile', function(req, res){
         console.log(req.decoded);
-        User.findOne({_id: req.decoded.userId}).select('username email avatar avatarColor')
+        User.findOne({_id: req.decoded.userId}).select('username email avatar avatarColor rooms')
             .exec(((err, user) => {
                 if(err){
                     res.json(

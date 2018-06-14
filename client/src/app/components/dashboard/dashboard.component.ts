@@ -16,7 +16,9 @@ export class DashboardComponent implements OnInit {
   private username: string;
   private userAvatar: string;
   private userAvatarColor: string;
-  private room: String = 'Global';
+  private rooms: Array<String>;
+  private room: string;
+  private newRoomName: String = '';
 
   constructor(private chatService: ChatService, private authService: AuthService, private router: Router) { }
 
@@ -34,6 +36,8 @@ export class DashboardComponent implements OnInit {
             this.username = data.user.username;
             this.userAvatar = data.user.avatar;
             this.userAvatarColor = data.user.avatarColor;
+            this.rooms = data.user.rooms;
+            this.room = data.user.rooms[0];
         },
     );
 
@@ -64,7 +68,7 @@ export class DashboardComponent implements OnInit {
 
     this.chatService.sendMessage({
       from: this.username,
-      to: 'global',
+      to: this.room,
       content: this.currentMessage,
       senderAvatar: this.userAvatar,
       senderAvatarColor: this.userAvatarColor
@@ -72,4 +76,23 @@ export class DashboardComponent implements OnInit {
     this.currentMessage = '';
   }
 
+  addRoom() {
+    if (this.rooms.indexOf(this.newRoomName) !== -1) {
+      alert('Room already exists!');
+      return;
+    }
+    this.rooms.push(this.newRoomName);
+    this.newRoomName = '';
+  }
+
+  changeRoom(roomName) {
+    this.fetchedMessages = [];
+    this.room = roomName;
+    this.chatService.fetchMessages(roomName)
+      .subscribe(
+        data => {
+          data.json().map(msg => this.fetchedMessages.push(msg));
+        }
+      );
+  }
 }

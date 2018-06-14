@@ -54,7 +54,8 @@ const userSchema = new Schema({
     username: { type: String, required: true, unique: true, lowercase: true, validate: usernameValidators },
     password: { type: String, required: true, validate: passwordValidators },
     avatar: {type: String, default: 'fas fa-user-ninja'},
-    avatarColor: {type: String, default: 'bg-dark'}
+    avatarColor: {type: String, default: 'bg-dark'},
+    rooms: {type: Array, default: ['global']}
 });
 
 //Middleware to hash the password

@@ -1,6 +1,6 @@
 .backdrop{
     width:100vw;
-    min-height:105vh;
+    height:100%;
     z-index: 10;
     background-color:rgba(0,0,0,.7);
     position: absolute;

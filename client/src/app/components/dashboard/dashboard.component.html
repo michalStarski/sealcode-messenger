@@ -15,9 +15,9 @@
     </form>
     </div>
     <ul class="rooms bg-dark text-white col-12 col-md-4">
-        <li class="roomPreview border">
+        <li (click)="changeRoom(room)" *ngFor="let room of rooms" class="roomPreview border">
             <div class="roomPicture">
-                <i class="fas fa-globe"></i>
+                <i [ngClass]="{'fa fa-globe': room === 'global', 'fas fa-at': room !== 'global'}" class="fas fa-globe"></i>
             </div>
             <div class="roomPreviewText">
                 <span class="roomPreviewName">{{ room }}</span>
@@ -25,7 +25,9 @@
         </li>
         <li>
             <div class="room-bar">
-                <i class="fas fa-plus-square text-success"></i>
+                <label for="room">Create a new room</label>
+                <input [(ngModel)]="newRoomName" type="text" name="room" class="form-control" id="room" autocomplete="off">
+                <i (click)="addRoom()" class="fas fa-plus-square text-success"></i>
             </div>
         </li>
     </ul>
