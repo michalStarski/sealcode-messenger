@@ -30,6 +30,14 @@ module.exports = function(router){
                 }
             );
         }
+        if(req.body.password !== req.body.confirmPassword){
+            res.json(
+                {
+                    success: false,
+                    message: 'Passwords does not match'
+                }
+            )
+        }
         else{
             const user = new User({
                 email: req.body.email.toLowerCase(),

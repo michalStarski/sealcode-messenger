@@ -75,11 +75,19 @@ export class RegisterComponent implements OnInit {
 
   // Submit the form
   onRegisterSubmit() {
+
+    if (this.form.get('password').value !== this.form.get('confirmPassword').value) {
+      this.messageClass = 'alert alert-danger';
+      this.message = 'Passwords do not match';
+      return;
+    }
+
     this.processing = true;
     const user = {
       email: this.form.get('email').value,
       username: this.form.get('username').value,
       password: this.form.get('password').value,
+      confirmPassword: this.form.get('confirmPassword').value
     };
     this.authService.registerUser(user).subscribe(data => {
       if (!data.success) {
