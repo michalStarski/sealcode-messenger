@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import * as io from 'socket.io-client';
 import { environment } from '../../environments/environment';
 import { Observable } from 'rxjs';
+import { Http, Headers, RequestOptions} from '@angular/http';
 
 // Message Interface
 interface Message {
@@ -18,12 +19,17 @@ interface Message {
 
 export class ChatService {
 
+  private domain = 'http://localhost:8080';
+  private authToken;
+
   public messages: Array<Message> = [];
 
   // Create connection
   private socket = io(environment.websocket_url);
 
-  constructor() { }
+  constructor(
+    private http: Http
+  ) { }
 
   // Send Message
   sendMessage(msg: Message) {
@@ -44,15 +50,17 @@ export class ChatService {
     return observable;
   }
 
-  joinRoom(name) {
-    const observable = new Observable<any>(obs => {
-      this.socket.on(`fetched${name}`, data => {
-        this.messages.push(data);
-        obs.next(data);
-      });
-      return () => this.socket.disconnect();
+  fetchMessages(roomName: string) {
+    const token = localStorage.getItem('token');
+    this.authToken = token;
+    const options = new RequestOptions({
+      headers: new Headers({
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        'Authorization': this.authToken
+      })
     });
-    return observable;
+    return this.http.get(this.domain + `/authentication/messages/${roomName}`, options);
   }
-
 }
+

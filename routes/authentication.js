@@ -1,6 +1,7 @@
 const User = require('../models/user');
 const jwt = require('jsonwebtoken');
 const config = require('../config/db');
+const Message = require('../models/message');
 
 module.exports = function(router){
     //Register route
@@ -306,6 +307,12 @@ module.exports = function(router){
             })
         }
     });
+
+    router.get('/messages/:room', function(req,res){
+        Message.find({to: req.params.room}, function(err, msg){
+            res.json(msg);
+        });
+    })
 
     return router;
 }

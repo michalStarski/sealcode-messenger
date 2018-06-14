@@ -35,7 +35,13 @@ export class DashboardComponent implements OnInit {
             this.userAvatar = data.user.avatar;
             this.userAvatarColor = data.user.avatarColor;
         },
-      );
+    );
+
+    this.chatService.fetchMessages('global').subscribe(
+      data => {
+        data.json().map(msg => this.fetchedMessages.push(msg));
+      }
+    );
 
     // Fetch messages and push them into local array
       this.chatService.newMessage()
@@ -43,14 +49,6 @@ export class DashboardComponent implements OnInit {
         data => {
           console.log(data);
           this.fetchedMessages.push(data);
-        }
-      );
-
-    // On connection join room 'Global'
-    this.chatService.joinRoom('Global')
-      .subscribe(
-        data => {
-          data.map(element => this.fetchedMessages.push(element));
         }
       );
   }
