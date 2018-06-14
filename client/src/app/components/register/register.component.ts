@@ -9,14 +9,14 @@ import { AuthService } from '../../services/auth.service';
 })
 export class RegisterComponent implements OnInit {
 
-  private form: FormGroup;
-  private message: String;
-  private messageClass: String;
-  private processing: Boolean = false;
-  private emailMessage: String;
-  private emailValid: Boolean;
-  private usernameValid: Boolean;
-  private usernameMessage: String;
+  public form: FormGroup;
+  public message: String;
+  public messageClass: String;
+  public processing: Boolean = false;
+  public emailMessage: String;
+  public emailValid: Boolean;
+  public usernameValid: Boolean;
+  public usernameMessage: String;
 
   constructor(
     private formBuilder: FormBuilder,

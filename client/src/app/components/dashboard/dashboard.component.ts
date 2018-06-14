@@ -10,15 +10,15 @@ import { Router, NavigationEnd } from '@angular/router';
 })
 export class DashboardComponent implements OnInit {
 
-  private currentMessage: string;
-  private fetchedMessages: Array<Object> = [];
+  public currentMessage: string;
+  public fetchedMessages: Array<Object> = [];
 
-  private username: string;
-  private userAvatar: string;
-  private userAvatarColor: string;
-  private rooms: Array<String>;
-  private room: string;
-  private newRoomName: String = '';
+  public username: string;
+  public userAvatar: string;
+  public userAvatarColor: string;
+  public rooms: Array<String>;
+  public room: string;
+  public newRoomName: String = '';
 
   constructor(private chatService: ChatService, private authService: AuthService, private router: Router) { }
 

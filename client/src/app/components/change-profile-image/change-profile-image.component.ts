@@ -12,7 +12,7 @@ export class ChangeProfileImageComponent implements OnInit {
 
   private color: string;
   private avatar: string;
-  @Input() private show: boolean;
+  @Input() public show: boolean;
 
   ngOnInit() {
   }

@@ -9,8 +9,8 @@ export class BackdropComponent implements OnInit {
 
   constructor() { }
 
-  @Input() private showBackdrop: Boolean;
-  @Output() private backdropEvent = new EventEmitter<Boolean>();
+  @Input() public showBackdrop: Boolean;
+  @Output() public backdropEvent = new EventEmitter<Boolean>();
 
   ngOnInit() {
   }

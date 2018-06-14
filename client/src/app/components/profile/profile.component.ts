@@ -8,14 +8,14 @@ import { AuthService } from '../../services/auth.service';
 })
 export class ProfileComponent implements OnInit {
 
-  private username: String;
-  private email: String;
-  private avatar: String;
-  private avatarColor: String;
-  private avatarChangeModal: Boolean = false;
-  private passwordModal: Boolean = false;
+  public username: String;
+  public email: String;
+  public avatar: String;
+  public avatarColor: String;
+  public avatarChangeModal: Boolean = false;
+  public passwordModal: Boolean = false;
 
-  @Input() private showBackdrop: Boolean = false;
+  @Input() public showBackdrop: Boolean = false;
 
   constructor(private authService: AuthService) { }
 

@@ -8,7 +8,7 @@ import { AuthService } from '../../services/auth.service';
 })
 export class ChangePasswordComponent implements OnInit {
 
-  @Input() private show: boolean;
+  @Input() public show: boolean;
   private oldPassword: String = '';
   private newPassword: String = '';
 
