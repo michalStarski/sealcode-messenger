@@ -17,7 +17,6 @@ interface User {
 })
 export class AuthService {
 
-  domain = 'http://localhost:8080';
   private user: String;
   private authToken: string;
   private options: RequestOptions;
@@ -28,7 +27,7 @@ export class AuthService {
 
   // Register a user
   registerUser(user: User) {
-    return this.http.post(this.domain + '/authentication/register', user)
+    return this.http.post('/authentication/register', user)
       .pipe(
         map(res => res.json())
       );
@@ -36,14 +35,14 @@ export class AuthService {
 
   // Live check if current typed email is valid
   checkEmail(email) {
-    return this.http.get(this.domain + '/authentication/checkEmail/' + email)
+    return this.http.get('/authentication/checkEmail/' + email)
       .pipe(
         map(res => res.json())
       );
   }
   // Live check if current typed username is valid
   checkUsername(username) {
-    return this.http.get(this.domain + '/authentication/checkUsername/' + username)
+    return this.http.get('/authentication/checkUsername/' + username)
       .pipe(
         map(res => res.json())
       );
@@ -51,7 +50,7 @@ export class AuthService {
 
   // Login
   login(user) {
-    return this.http.post(this.domain + '/authentication/login', user)
+    return this.http.post('/authentication/login', user)
       .pipe(
         map(res => res.json())
       );
@@ -86,7 +85,7 @@ export class AuthService {
   // Get user profile
   getProfile() {
     this.createAuthenticationHeader();
-    return this.http.get(this.domain + '/authentication/profile', this.options)
+    return this.http.get('/authentication/profile', this.options)
       .pipe(
         map(res => res.json())
       );
@@ -111,7 +110,7 @@ export class AuthService {
     const colors = ['bg-primary', 'bg-secondary', 'bg-success', 'bg-danger', 'bg-info'];
 
     this.createAuthenticationHeader();
-    return this.http.put(this.domain + '/authentication/updateAvatar', {
+    return this.http.put('/authentication/updateAvatar', {
       avatar: icon,
       avatarColor: color
     }, this.options).pipe(
@@ -127,7 +126,7 @@ export class AuthService {
     }
 
     this.createAuthenticationHeader();
-    return this.http.put(this.domain + '/authentication/changePassword', {
+    return this.http.put('/authentication/changePassword', {
       oldPassword: oldPassword,
       newPassword: newPassword
     }, this.options).pipe(

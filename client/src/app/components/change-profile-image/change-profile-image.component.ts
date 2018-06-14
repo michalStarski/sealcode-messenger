@@ -15,7 +15,6 @@ export class ChangeProfileImageComponent implements OnInit {
   @Input() private show: boolean;
 
   ngOnInit() {
-    console.log(this.show);
   }
 
   setColor(color: string): void {

@@ -26,13 +26,11 @@ export class DashboardComponent implements OnInit {
     this.authService.getProfile()
       .subscribe(
         data => {
-          console.log(data);
-          // Add this condition when ready to production because of nodemon constant updates
-          // if (!data.success) {
-          //   alert(data.message);
-          //   this.authService.logout();
-          //   this.router.navigate(['/home']);
-          // }
+          if (!data.success) {
+            alert(data.message);
+            this.authService.logout();
+            this.router.navigate(['/home']);
+          }
             this.username = data.user.username;
             this.userAvatar = data.user.avatar;
             this.userAvatarColor = data.user.avatarColor;
@@ -52,7 +50,6 @@ export class DashboardComponent implements OnInit {
       this.chatService.newMessage()
       .subscribe(
         data => {
-          console.log(data);
           this.fetchedMessages.push(data);
         }
       );

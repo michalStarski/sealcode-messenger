@@ -19,13 +19,12 @@ interface Message {
 
 export class ChatService {
 
-  private domain = 'http://localhost:8080';
   private authToken;
 
   public messages: Array<Message> = [];
 
   // Create connection
-  private socket = io(environment.websocket_url);
+  private socket = io();
 
   constructor(
     private http: Http
@@ -60,7 +59,7 @@ export class ChatService {
         'Authorization': this.authToken
       })
     });
-    return this.http.get(this.domain + `/authentication/messages/${roomName}`, options);
+    return this.http.get(`/authentication/messages/${roomName}`, options);
   }
 
   addRoom(roomName) {
@@ -73,7 +72,7 @@ export class ChatService {
         'Authorization': this.authToken
       })
     });
-    return this.http.put(this.domain + '/authentication/addRoom', {roomname: roomName}, options);
+    return this.http.put('/authentication/addRoom', {roomname: roomName}, options);
   }
 }
 
