@@ -22,6 +22,7 @@
 
 .rooms{
     min-height:65vh;
+    position: relative;
 }
 
 .bar{
@@ -68,4 +69,19 @@
     height:40px;
     text-align: center;
     margin-right: 10px;
+}
+
+.room-bar{
+    position: absolute;
+    bottom: 0;
+    right:0;
+    margin-right:10px;
+    font-size:1.5rem;
+    cursor:pointer;
+}
+
+.room-bar i:hover::before {
+    content: 'Add a room';
+    font-size: 1rem;
+    color: yellowgreen;
 }

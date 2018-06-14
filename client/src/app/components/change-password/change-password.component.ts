@@ -26,7 +26,12 @@ export class ChangePasswordComponent implements OnInit {
 
     this.authService.changePassword(this.oldPassword, this.newPassword)
       .subscribe(
-        data => { alert(data.message); }
+        data => {
+          alert(data.message);
+          if (data.success) {
+            location.reload();
+          }
+        }
       );
   }
 }

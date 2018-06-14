@@ -11,7 +11,7 @@
     </ul>
     <form #form="ngForm" (ngSubmit)="send()" class="form-group bar">
             <input class="form-control" [(ngModel)]="currentMessage" type="text" name="input" id="input" autocomplete="off">
-            <button class="btn btn-primary" type="submit">Send</button>
+            <button class="btn btn-primary" type="submit"><i class="fab fa-telegram-plane"></i></button>
     </form>
     </div>
     <ul class="rooms bg-dark text-white col-12 col-md-4">
@@ -21,6 +21,11 @@
             </div>
             <div class="roomPreviewText">
                 <span class="roomPreviewName">{{ room }}</span>
+            </div>
+        </li>
+        <li>
+            <div class="room-bar">
+                <i class="fas fa-plus-square text-success"></i>
             </div>
         </li>
     </ul>
