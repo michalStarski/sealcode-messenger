@@ -22,13 +22,7 @@ app.use(cors({
 }));
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
-app.use(express.static(path.join(__dirname, 'client/dist/client')));
 app.use('/authentication', authentication);
-
-//Routes
-app.get('*', function(req, res){
-    res.sendFile(path.join(__dirname + '/client/dist/client/index.html'));
-});
 
 //Database configuration
 mongoose.Promise = global.Promise;

@@ -2,7 +2,7 @@ const crypto = require('crypto').randomBytes(256).toString('hex');
 
 
 module.exports = {
-    uri: `mongodb://localhost:27017/sealcodeMessenger`,
+    uri: `mongodb://micsta13:secretpassword23@ds016098.mlab.com:16098/sealcode-messenger`,
     secret: crypto,
-    db: 'sealcodeMessenger',
+    db: 'sealcode-messenger',
 }

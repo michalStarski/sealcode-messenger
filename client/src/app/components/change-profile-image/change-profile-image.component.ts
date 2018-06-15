@@ -10,8 +10,8 @@ export class ChangeProfileImageComponent implements OnInit {
 
   constructor(private authService: AuthService) { }
 
-  private color: string;
-  private avatar: string;
+  private color: String = 'bg-primary';
+  private avatar: String = 'fas fa-user-ninja';
   @Input() public show: boolean;
 
   ngOnInit() {
