@@ -21,7 +21,7 @@ $ npm install
 ```
 
 
-After that run the same command in the /client directory.
+After that **run the same command in the /client directory**.
 
 **This will install all required dependencies**
 
@@ -32,7 +32,7 @@ Inside the root folder run
 $ node app
 ```
 
-And inside the client folder run
+And inside the **client** folder run
 
 ```
 $ ng serve
