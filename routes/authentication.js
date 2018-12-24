@@ -109,7 +109,7 @@ module.exports = function(router){
     //Check if username is already taken
     router.get('/checkUsername/:username', function(req, res){
         const username = req.params.username;
-        User.findOne({username: username}, (err, user) => {
+        User.findOne({username: username.toLowerCase()}, (err, user) => {
             if(err){
                 res.json(
                     {
